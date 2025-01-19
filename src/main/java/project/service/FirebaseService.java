@@ -35,13 +35,13 @@ public class FirebaseService {
                 System.out.println("************** Firebase Connected **************");
                 return true;
             } else {
-                System.out.println("Firebase is already initialized.");
+                System.out.println("--- Firebase is already initialized ---");
                 return true;
             }
         } catch (IOException e) {
             JOptionPane.showMessageDialog(
                     null,
-                    "Failed to load Firebase configuration file. Check file permissions or path.\n" + e.getMessage(),
+                    "Failed to load Firebase configuration file\nCheck file permissions or path\n" + "Error: " + e.getMessage(),
                     "Firebase Error",
                     JOptionPane.WARNING_MESSAGE
             );
@@ -49,7 +49,7 @@ public class FirebaseService {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(
                     null,
-                    "Unexpected error during Firebase initialization.\n" + e.getMessage(),
+                    "Unexpected error during Firebase initialization\n" + "Error: " + e.getMessage(),
                     "Unexpected Error",
                     JOptionPane.WARNING_MESSAGE
             );
