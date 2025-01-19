@@ -10,6 +10,9 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import project.service.FirebaseService;
+import project.service.InternetUtility;
+
 import javax.swing.*;
 import java.io.InputStream;
 import java.util.Objects;

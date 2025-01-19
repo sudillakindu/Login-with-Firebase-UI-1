@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import project.model.SignInAndSignUpModel;
 import project.unit.ShowAlert;
 
 import javax.swing.*;
