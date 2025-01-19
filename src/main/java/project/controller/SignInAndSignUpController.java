@@ -15,13 +15,17 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import project.model.SignInAndSignUpModel;
+import project.service.EmailOTPSender;
+import project.unit.OTPGenerator;
 import project.unit.ShowAlert;
+import project.unit.UserSignInSignUp;
 
 import javax.swing.*;
 import java.awt.*;
 import java.net.URI;
 import java.util.Objects;
-import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SignInAndSignUpController {
 
@@ -29,15 +33,17 @@ public class SignInAndSignUpController {
     private AnchorPane mainAnchorPane;
 
     @FXML
-    private Pane mainPane, leftPane, signInPane, signUpPane;
+    private Pane mainPane, leftPane, signInPane, signUpPane, verificationCenterPane;
 
     @FXML
-    private ImageView leftPaneExitImage, leftPaneImage, signInImage, stellixorImage, signUpImage;
+    private ImageView leftPaneExitImage, leftPaneImage, signInImage, stellixorImage, signUpImage, verificationCenterImage, verificationCenterBackImage;
 
     @FXML
     private Button signInShowPasswordButton, signInForgotPasswordButton, signInButton, signUpAccountButton;
     @FXML
     private Button signUpButton, signInAccountButton;
+    @FXML
+    private Button sendOTPButton, submitButton;
 
     @FXML
     private Label stellixorLabel;
@@ -48,9 +54,10 @@ public class SignInAndSignUpController {
     private PasswordField signInPasswordField;
 
     @FXML
-    private TextField signUpUsernameTextField, signUpEmailTextField;
+    private TextField signUpUsernameTextField, signUpEmailTextField, signUpPasswordTextField;
+
     @FXML
-    private PasswordField signUpPasswordTextField;
+    private TextField verificationCenterRootPasswordTextField, verificationCenterYourEmailTextField, verificationCenterOTPCodeTextField;
 
     @FXML
     private ComboBox<String> signUpSelectRoleComboBox;
@@ -59,14 +66,19 @@ public class SignInAndSignUpController {
 
     @FXML
     private void initialize() {
+        mainPane.setVisible(true);
+        leftPane.setVisible(true);
         signInPane.setVisible(true);
         signUpPane.setVisible(false);
+        verificationCenterPane.setVisible(false);
 
         setImage(leftPaneExitImage, "/images/icons8-exit-50.png");
         setImage(leftPaneImage, "/images/website-designing.png");
         setImage(signInImage, "/images/login-access-vector.png");
         setImage(stellixorImage, "/images/Stellixor-Technologies.png");
         setImage(signUpImage, "/images/online-registration.png");
+        setImage(verificationCenterBackImage, "/images/icons-back-50.png");
+        setImage(verificationCenterImage, "/images/a-code-verification-vector.png");
 
         signUpSelectRoleComboBox.getItems().addAll("admin", "user");
 
@@ -192,12 +204,24 @@ public class SignInAndSignUpController {
 
     ////////////////////////////// Sign Up //////////////////////////////
 
+    private boolean isValidEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
+    private String username = null;
+    private String email = null;
+    private String password = null;
+    private String role = null;
+
     @FXML
     private void onSignUpButtonClick(ActionEvent event) {
-        String username = signUpUsernameTextField.getText();
-        String email = signUpEmailTextField.getText();
-        String password = signUpPasswordTextField.getText();
-        String role = signUpSelectRoleComboBox.getValue();
+        username = signUpUsernameTextField.getText();
+        email = signUpEmailTextField.getText();
+        password = signUpPasswordTextField.getText();
+        role = signUpSelectRoleComboBox.getValue();
 
         if (username.isEmpty() || email.isEmpty() || password.isEmpty() || role == null) {
             ShowAlert.showAlert(Alert.AlertType.WARNING, "Input Error",
@@ -205,30 +229,24 @@ public class SignInAndSignUpController {
             return;
         }
 
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Root Password");
-        dialog.setHeaderText(null);
-        dialog.setContentText("Enter root password: ");
-        dialog.initOwner(signUpPane.getScene().getWindow());
-        Optional<String> result = dialog.showAndWait();
+        // Validate email format
+        /*if (!isValidEmail(email)) {
+            ShowAlert.showAlert(Alert.AlertType.WARNING, "Invalid Email",
+                    "Please enter a valid email address", signUpPane);
+            return;
+        }*/
 
-        if (result.isPresent()) {
-            String rootpassword = result.get();
-            if (rootpassword.equals("aaa")) {
-                SignInAndSignUpModel.registerUser(username, email, password, role, signUpPane);
+        verificationCenterRootPasswordTextField.setDisable(false);
+        verificationCenterYourEmailTextField.setDisable(true);
+        verificationCenterOTPCodeTextField.clear();
 
-                signUpSelectRoleComboBox.setValue("user");
-                signUpUsernameTextField.clear();
-                signUpEmailTextField.clear();
-                signUpPasswordTextField.clear();
-            } else {
-                ShowAlert.showAlert(Alert.AlertType.WARNING, "Root Error",
-                        "Invalid root password", signUpPane);
-            }
-        } else {
-            ShowAlert.showAlert(Alert.AlertType.WARNING, "Root Error",
-                    "Root password input was cancelled", signUpPane);
-        }
+        verificationCenterYourEmailTextField.setText(email);
+
+        sendOTPButton.setDisable(false);
+        submitButton.setDisable(true);
+
+        signUpPane.setVisible(false);
+        verificationCenterPane.setVisible(true);
     }
 
     @FXML
@@ -253,5 +271,88 @@ public class SignInAndSignUpController {
         }
     }
 
-    ////////////////////////////////////////////////////////////////////
+    ////////////////////////////// Verification Center //////////////////////////////
+
+    @FXML
+    private void onVerificationCenterBackImageImageMouseClicked(MouseEvent mouseEvent) {
+        verificationCenterPane.setVisible(false);
+        signUpPane.setVisible(true);
+        verificationCenterRootPasswordTextField.clear();
+        verificationCenterOTPCodeTextField.clear();
+    }
+
+    private String rootPassword = null;
+    private String recipientEmail = null;
+    private String generateOTP = null;
+
+    @FXML
+    private void onSendOTPButtonClick(ActionEvent event) {
+        rootPassword = verificationCenterRootPasswordTextField.getText();
+        recipientEmail = verificationCenterYourEmailTextField.getText();
+
+        if (rootPassword.isEmpty() || recipientEmail.isEmpty()) {
+            ShowAlert.showAlert(Alert.AlertType.WARNING, "Input Error",
+                    "Root password field is required", verificationCenterPane); // verificationCenterPane
+            return;
+        }
+
+        if (rootPassword.equals("aaa")) {
+            generateOTP = OTPGenerator.generateNumericOTP(6);
+            System.out.println("Generated OTP: " + generateOTP);
+
+            boolean isOTPSent = EmailOTPSender.sendEmail(recipientEmail, generateOTP);
+
+            if (isOTPSent) {
+                sendOTPButton.setDisable(true);
+                submitButton.setDisable(false);
+                verificationCenterRootPasswordTextField.setDisable(true);
+            } else {
+            ShowAlert.showAlert(Alert.AlertType.ERROR, "Email Error",
+                    "Failed to send OTP\nPlease try again later", verificationCenterPane);
+            }
+
+        } else {
+            ShowAlert.showAlert(Alert.AlertType.WARNING, "Root Error",
+                    "Invalid root password", verificationCenterPane);
+        }
+    }
+
+    @FXML
+    private void onSubmitButtonClick(ActionEvent event) {
+        String enteredOTP = verificationCenterOTPCodeTextField.getText();
+
+        if (rootPassword.isEmpty() || recipientEmail.isEmpty() || enteredOTP.isEmpty()) {
+            ShowAlert.showAlert(Alert.AlertType.WARNING, "Input Error",
+                    "OTP code field is required", verificationCenterPane); // verificationCenterPane
+            return;
+        }
+
+        System.out.println("Generated OTP SubmitButton: " + generateOTP);
+        if (enteredOTP.equals(generateOTP)) {
+
+            System.out.println("Generated OTP Eq : " + generateOTP);
+            System.out.println(username + " || " + email + " || " + password + " || " + role);
+
+            submitButton.setDisable(true);
+
+            SignInAndSignUpModel.registerUser(username, email, password, role, signUpPane);
+
+            signUpSelectRoleComboBox.setValue("user");
+            signUpUsernameTextField.clear();
+            signUpEmailTextField.clear();
+            signUpPasswordTextField.clear();
+
+            verificationCenterRootPasswordTextField.clear();
+            verificationCenterYourEmailTextField.clear();
+            verificationCenterOTPCodeTextField.clear();
+
+            verificationCenterPane.setVisible(false);
+            signUpPane.setVisible(true);
+        } else {
+            ShowAlert.showAlert(Alert.AlertType.WARNING, "OTP Error",
+                    "Incorrect OTP. Please try again", verificationCenterPane);
+        }
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////
 }
