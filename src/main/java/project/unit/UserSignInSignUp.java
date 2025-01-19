@@ -6,6 +6,9 @@ public class UserSignInSignUp {
     private String password;
     private String role;
 
+    public UserSignInSignUp() {
+    }
+
     public UserSignInSignUp(String username, String email, String password, String role) {
         this.username = username;
         this.email = email;

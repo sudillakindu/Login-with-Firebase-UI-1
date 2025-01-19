@@ -2,6 +2,7 @@ package project.unit;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -81,6 +82,25 @@ public class ShowAlert {
 
         return okButton;
     }
+
+//    public static void showAlert(Alert.AlertType alertType, String title, String content) {
+//        StackPane alertPane = createAlertPane(null);
+//
+//        Image icon = getAlertIcon(alertType);
+//        VBox alertContent = createAlertContent(title, content, icon);
+//
+//        Button okButton = createOkButton(null, alertPane, null);
+//        alertContent.getChildren().add(okButton);
+//
+//        alertPane.getChildren().add(alertContent);
+//        StackPane.setAlignment(alertContent, Pos.CENTER);
+//
+//        Scene scene = alertPane.getScene();
+//        if (scene != null) {
+//            Pane rootPane = (Pane) scene.getRoot();
+//            rootPane.getChildren().add(alertPane);
+//        }
+//    }
 
     public static void showAlert(Alert.AlertType alertType, String title, String content, Pane ownerPane) {
         StackPane alertPane = createAlertPane(ownerPane);
