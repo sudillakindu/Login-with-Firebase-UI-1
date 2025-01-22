@@ -22,78 +22,76 @@
                 </cursor>
             </ImageView>
         </Pane>
-        <Pane fx:id="signUpPane" layoutX="550.0" prefHeight="768.0" prefWidth="474.0" style="-fx-background-color: #ffffff; -fx-text-fill: white;">
-            <ImageView fx:id="signUpImage" fitHeight="171.0" fitWidth="257.0" layoutX="119.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="80.0" layoutY="217.0" text="Create an account" textAlignment="CENTER">
-                <font>
-                    <Font name="Arial Rounded MT Bold" size="35.0" />
-                </font>
-            </Label>
-            <Label layoutX="80.0" layoutY="458.0" text="Email">
-                <font>
-                    <Font name="Times New Roman Bold" size="17.0" />
-                </font>
-            </Label>
-            <Label layoutX="80.0" layoutY="534.0" text="Password">
-                <font>
-                    <Font name="Times New Roman Bold" size="17.0" />
-                </font>
-            </Label>
-            <TextField fx:id="signUpEmailTextField" layoutX="80.0" layoutY="486.0" prefWidth="249.0" promptText="stellixor@gmail.com" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #e6e6e6); -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3E7B27; -fx-border-width: 2; -fx-font-size: 14px; -fx-text-fill: #333333; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);">
-                <cursor>
-                    <Cursor fx:constant="TEXT" />
-                </cursor>
-            </TextField>
-            <Label layoutX="80.0" layoutY="266.0" text="Your service is necessary for us!" textAlignment="CENTER">
+    <Pane fx:id="signUpPane" layoutX="550.0" prefHeight="768.0" prefWidth="474.0" style="-fx-background-color: #ffffff; -fx-text-fill: white;">
+        <ImageView fx:id="signUpImage" fitHeight="171.0" fitWidth="257.0" layoutX="119.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
+        <Label layoutX="80.0" layoutY="217.0" text="Create an account" textAlignment="CENTER">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="35.0" />
+            </font>
+        </Label>
+        <Label layoutX="80.0" layoutY="458.0" text="Email">
+            <font>
+                <Font name="Times New Roman Bold" size="17.0" />
+            </font>
+        </Label>
+        <Label layoutX="80.0" layoutY="534.0" text="Password">
+            <font>
+                <Font name="Times New Roman Bold" size="17.0" />
+            </font>
+        </Label>
+        <TextField fx:id="signUpEmailTextField" layoutX="80.0" layoutY="486.0" prefWidth="249.0" promptText="stellixor@gmail.com" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #e6e6e6); -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3E7B27; -fx-border-width: 2; -fx-font-size: 14px; -fx-text-fill: #333333; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);">
+            <cursor>
+                <Cursor fx:constant="TEXT" />
+            </cursor>
+        </TextField>
+        <Label layoutX="80.0" layoutY="266.0" text="Your service is necessary for us!" textAlignment="CENTER">
+            <font>
+                <Font name="Times New Roman" size="15.0" />
+            </font>
+        </Label>
+        <Button fx:id="signUpButton" layoutX="80.0" layoutY="620.0" mnemonicParsing="false" onAction="#onSignUpButtonClick" prefHeight="43.0" prefWidth="314.0" style="-fx-background-color: #123524; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-padding: 10 20; -fx-border-radius: 25; -fx-background-radius: 25; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 5); -fx-border-color: rgba(255, 255, 255, 0.5); -fx-border-width: 2; -fx-border-insets: -1; -fx-background-insets: -1;" text="Sign Up">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <Group layoutX="135.0" layoutY="675.0">
+            <Label layoutX="0.19775390625" layoutY="7.0" text="Do you have an account?" textAlignment="CENTER">
                 <font>
                     <Font name="Times New Roman" size="15.0" />
                 </font>
             </Label>
-            <Button fx:id="signUpButton" layoutX="80.0" layoutY="620.0" mnemonicParsing="false" onAction="#onSignUpButtonClick" prefHeight="43.0" prefWidth="314.0" style="-fx-background-color: #123524; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-padding: 10 20; -fx-border-radius: 25; -fx-background-radius: 25; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 5); -fx-border-color: rgba(255, 255, 255, 0.5); -fx-border-width: 2; -fx-border-insets: -1; -fx-background-insets: -1;" text="Sign Up">
+            <Button fx:id="signInAccountButton" layoutX="148.19775390625" mnemonicParsing="false" onAction="#onSignInAccountButtonClick" style="-fx-background-color: transparent; -fx-text-fill: #123524;" text="Sign In" underline="true">
                 <cursor>
                     <Cursor fx:constant="HAND" />
                 </cursor>
+                <font>
+                    <Font size="15.0" />
+                </font>
             </Button>
-            <Group layoutX="135.0" layoutY="675.0">
-                <Label layoutX="0.19775390625" layoutY="7.0" text="Do you have an account?" textAlignment="CENTER">
-                    <font>
-                        <Font name="Times New Roman" size="15.0" />
-                    </font>
-                </Label>
-                <Button fx:id="signInAccountButton" layoutX="148.19775390625" mnemonicParsing="false" onAction="#onSignInAccountButtonClick" style="-fx-background-color: transparent; -fx-text-fill: #123524;" text="Sign In" underline="true">
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                    <font>
-                        <Font size="15.0" />
-                    </font>
-                </Button>
-            </Group>
-            <Label layoutX="80.0" layoutY="382.0" text="Username">
-                <font>
-                    <Font name="Times New Roman Bold" size="17.0" />
-                </font>
-            </Label>
-            <TextField fx:id="signUpUsernameTextField" layoutX="80.0" layoutY="410.0" prefWidth="249.0" promptText="stellixor" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #e6e6e6); -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3E7B27; -fx-border-width: 2; -fx-font-size: 14px; -fx-text-fill: #333333; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);">
-                <cursor>
-                    <Cursor fx:constant="TEXT" />
-                </cursor>
-            </TextField>
-            <Label layoutX="80.0" layoutY="306.0" text="Select Role">
-                <font>
-                    <Font name="Times New Roman Bold" size="17.0" />
-                </font>
-            </Label>
-            <ComboBox fx:id="signUpSelectRoleComboBox" layoutX="80.0" layoutY="334.0" prefWidth="249.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #e6e6e6); -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3E7B27; -fx-border-width: 2; -fx-font-size: 14px; -fx-text-fill: #333333; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);" />
-         <TextField fx:id="signUpPasswordTextField" layoutX="80.0" layoutY="562.0" prefWidth="249.0" promptText="************" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #e6e6e6); -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3E7B27; -fx-border-width: 2; -fx-font-size: 14px; -fx-text-fill: #333333; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);">
+        </Group>
+        <Label layoutX="80.0" layoutY="382.0" text="Username">
+            <font>
+                <Font name="Times New Roman Bold" size="17.0" />
+            </font>
+        </Label>
+        <TextField fx:id="signUpUsernameTextField" layoutX="80.0" layoutY="410.0" prefWidth="249.0" promptText="stellixor" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #e6e6e6); -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3E7B27; -fx-border-width: 2; -fx-font-size: 14px; -fx-text-fill: #333333; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);">
             <cursor>
-               <Cursor fx:constant="TEXT" />
+                <Cursor fx:constant="TEXT" />
             </cursor>
-         </TextField>
-        </Pane>
-<<<<<<< Updated upstream
+        </TextField>
+        <Label layoutX="80.0" layoutY="306.0" text="Select Role">
+            <font>
+                <Font name="Times New Roman Bold" size="17.0" />
+            </font>
+        </Label>
+        <ComboBox fx:id="signUpSelectRoleComboBox" layoutX="80.0" layoutY="334.0" prefWidth="249.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #e6e6e6); -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3E7B27; -fx-border-width: 2; -fx-font-size: 14px; -fx-text-fill: #333333; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);" />
+        <TextField fx:id="signUpPasswordTextField" layoutX="80.0" layoutY="562.0" prefWidth="249.0" promptText="************" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #e6e6e6); -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3E7B27; -fx-border-width: 2; -fx-font-size: 14px; -fx-text-fill: #333333; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);">
+            <cursor>
+                <Cursor fx:constant="TEXT" />
+            </cursor>
+        </TextField>
+    </Pane>
         <Pane fx:id="verificationCenterPane" layoutX="550.0" prefHeight="768.0" prefWidth="474.0" style="-fx-background-color: #ffffff; -fx-text-fill: white; -fx-border-color: black; -fx-border-width: 5px;">
-=======
         <Pane fx:id="signInPane" layoutX="550.0" prefHeight="768.0" prefWidth="474.0" style="-fx-background-color: #ffffff; -fx-text-fill: white;">
             <ImageView fx:id="signInImage" fitHeight="171.0" fitWidth="257.0" layoutX="109.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" />
             <Label layoutX="113.0" layoutY="254.0" text="Welcome back" textAlignment="CENTER">
