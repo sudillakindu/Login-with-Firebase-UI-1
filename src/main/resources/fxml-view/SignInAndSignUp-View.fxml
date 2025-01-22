@@ -195,7 +195,7 @@
             </cursor>
          </TextField>
         </Pane>
-        <Pane fx:id="verificationCenterPane" layoutX="550.0" prefHeight="768.0" prefWidth="474.0" style="-fx-background-color: #ffffff; -fx-text-fill: white; -fx-border-color: black; -fx-border-width: 5px;">
+        <Pane fx:id="verificationCenterPane" layoutX="550.0" prefHeight="768.0" prefWidth="474.0" style="-fx-background-color: #ffffff; -fx-text-fill: white;">
             <ImageView fx:id="verificationCenterImage" fitHeight="203.0" fitWidth="265.0" layoutX="139.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
             <Label layoutX="80.0" layoutY="274.0" text="Verification Center" textAlignment="CENTER">
                 <font>

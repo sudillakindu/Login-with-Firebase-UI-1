@@ -18,7 +18,6 @@ import project.model.SignInAndSignUpModel;
 import project.service.EmailOTPSender;
 import project.unit.OTPGenerator;
 import project.unit.ShowAlert;
-import project.unit.UserSignInSignUp;
 
 import javax.swing.*;
 import java.awt.*;
@@ -142,6 +141,10 @@ public class SignInAndSignUpController {
         signUpUsernameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             signUpUsernameTextField.setText(newValue.toLowerCase());
         });
+
+        signUpEmailTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            signUpEmailTextField.setText(newValue.toLowerCase());
+        });
     }
 
     ////////////////////////////// Sign In //////////////////////////////
@@ -229,12 +232,23 @@ public class SignInAndSignUpController {
             return;
         }
 
-        // Validate email format
-        /*if (!isValidEmail(email)) {
+        if (username.length() < 4 || username.length() > 9) {
+            ShowAlert.showAlert(Alert.AlertType.WARNING, "Invalid Username",
+                    "Username length must be between 5 and 8 characters", signUpPane);
+            return;
+        }
+
+        if (!isValidEmail(email)) {
             ShowAlert.showAlert(Alert.AlertType.WARNING, "Invalid Email",
                     "Please enter a valid email address", signUpPane);
             return;
-        }*/
+        }
+
+        if (password.length() < 4 || password.length() > 11) {
+            ShowAlert.showAlert(Alert.AlertType.WARNING, "Invalid Password",
+                    "Password length must be between 5 and 10 characters", signUpPane);
+            return;
+        }
 
         verificationCenterRootPasswordTextField.setDisable(false);
         verificationCenterYourEmailTextField.setDisable(true);
@@ -292,13 +306,13 @@ public class SignInAndSignUpController {
 
         if (rootPassword.isEmpty() || recipientEmail.isEmpty()) {
             ShowAlert.showAlert(Alert.AlertType.WARNING, "Input Error",
-                    "Root password field is required", verificationCenterPane); // verificationCenterPane
+                    "Root password field is required", verificationCenterPane);
             return;
         }
 
         if (rootPassword.equals("aaa")) {
             generateOTP = OTPGenerator.generateNumericOTP(6);
-            System.out.println("Generated OTP: " + generateOTP);
+            //System.out.println("Generated OTP: " + generateOTP);
 
             boolean isOTPSent = EmailOTPSender.sendEmail(recipientEmail, generateOTP);
 
@@ -323,15 +337,16 @@ public class SignInAndSignUpController {
 
         if (rootPassword.isEmpty() || recipientEmail.isEmpty() || enteredOTP.isEmpty()) {
             ShowAlert.showAlert(Alert.AlertType.WARNING, "Input Error",
-                    "OTP code field is required", verificationCenterPane); // verificationCenterPane
+                    "OTP code field is required", verificationCenterPane);
             return;
         }
 
-        System.out.println("Generated OTP SubmitButton: " + generateOTP);
+        //System.out.println("Generated OTP SubmitButton: " + generateOTP);
+
         if (enteredOTP.equals(generateOTP)) {
 
-            System.out.println("Generated OTP Eq : " + generateOTP);
-            System.out.println(username + " || " + email + " || " + password + " || " + role);
+            //System.out.println("Generated OTP Eq : " + generateOTP);
+            //System.out.println(username + " || " + email + " || " + password + " || " + role);
 
             submitButton.setDisable(true);
 
@@ -350,7 +365,7 @@ public class SignInAndSignUpController {
             signUpPane.setVisible(true);
         } else {
             ShowAlert.showAlert(Alert.AlertType.WARNING, "OTP Error",
-                    "Incorrect OTP. Please try again", verificationCenterPane);
+                    "Incorrect OTP\nPlease try again", verificationCenterPane);
         }
     }
 
