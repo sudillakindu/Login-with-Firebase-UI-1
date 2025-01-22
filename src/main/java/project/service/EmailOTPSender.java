@@ -12,7 +12,6 @@ public class EmailOTPSender {
 
     private static final Logger logger = Logger.getLogger(EmailOTPSender.class.getName());
 
-    // Modify the method to return a boolean indicating success/failure
     public static boolean sendEmail(String recipientEmail, String otp) {
         final String senderEmail = "masudillakindu@gmail.com";
         final String senderPassword = "bzvo lfsv kuqe cxdt";
@@ -53,7 +52,6 @@ public class EmailOTPSender {
             message.setContent(htmlContent, "text/html; charset=utf-8");
             Transport.send(message);
 
-            // Return true if the email is sent successfully
             return true;
 
         } catch (AuthenticationFailedException e) {
@@ -69,8 +67,7 @@ public class EmailOTPSender {
             logger.log(Level.SEVERE, "Unexpected error occurred.", e);
             //showMessageDialog("An unexpected error occurred\nPlease try again later");
         }
-
-        // Return false if there was an issue sending the email
+        
         return false;
     }
 
