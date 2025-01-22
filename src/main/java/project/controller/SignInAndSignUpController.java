@@ -33,17 +33,19 @@ public class SignInAndSignUpController {
     private AnchorPane mainAnchorPane;
 
     @FXML
-    private Pane mainPane, leftPane, signInPane, signUpPane, verificationCenterPane;
+    private Pane mainPane, leftPane, signInPane, signUpPane, verificationCenterPane, forgotPasswordPane;
 
     @FXML
-    private ImageView leftPaneExitImage, leftPaneImage, signInImage, stellixorImage, signUpImage, verificationCenterImage, verificationCenterBackImage;
+    private ImageView leftPaneExitImage, leftPaneImage, signInImage, stellixorImage, signUpImage, verificationCenterImage, verificationCenterBackImage, forgotPasswordImage, forgotPasswordBackImage;
 
     @FXML
     private Button signInShowPasswordButton, signInForgotPasswordButton, signInButton, signUpAccountButton;
     @FXML
     private Button signUpButton, signInAccountButton;
     @FXML
-    private Button sendOTPButton, submitButton;
+    private Button verificationCenterSendOTPButton, verificationCenterSubmitButton;
+    @FXML
+    private Button forgotPasswordSendOTPButton, forgotPasswordSubmitButton;
 
     @FXML
     private Label stellixorLabel;
@@ -51,13 +53,14 @@ public class SignInAndSignUpController {
     @FXML
     private TextField signInUsernameTextField, signInPasswordTextField;
     @FXML
-    private PasswordField signInPasswordField;
-
-    @FXML
     private TextField signUpUsernameTextField, signUpEmailTextField, signUpPasswordTextField;
-
     @FXML
     private TextField verificationCenterRootPasswordTextField, verificationCenterYourEmailTextField, verificationCenterOTPCodeTextField;
+    @FXML
+    private TextField forgotPasswordUsernameTextField, forgotPasswordEmailTextField, forgotPasswordNewPasswordTextField, forgotPasswordOTPCodeTextField;
+
+    @FXML
+    private PasswordField signInPasswordField;
 
     @FXML
     private ComboBox<String> signUpSelectRoleComboBox;
@@ -71,6 +74,7 @@ public class SignInAndSignUpController {
         signInPane.setVisible(true);
         signUpPane.setVisible(false);
         verificationCenterPane.setVisible(false);
+        forgotPasswordPane.setVisible(false);
 
         setImage(leftPaneExitImage, "/images/icons8-exit-50.png");
         setImage(leftPaneImage, "/images/website-designing.png");
@@ -79,6 +83,8 @@ public class SignInAndSignUpController {
         setImage(signUpImage, "/images/online-registration.png");
         setImage(verificationCenterBackImage, "/images/icons-back-50.png");
         setImage(verificationCenterImage, "/images/a-code-verification-vector.png");
+        setImage(forgotPasswordBackImage, "/images/icons-back-50.png");
+        setImage(forgotPasswordImage, "/images/forgot-the-password-vector.png");
 
         signUpSelectRoleComboBox.getItems().addAll("admin", "user");
 
@@ -166,6 +172,32 @@ public class SignInAndSignUpController {
     }
 
     @FXML
+    private void onSignInForgotPasswordButtonClick(ActionEvent event) {
+        String username = signInUsernameTextField.getText();
+
+        if (username.isEmpty()) {
+            ShowAlert.showAlert(Alert.AlertType.WARNING, "Input Error",
+                    "Username cannot be empty", signInPane);
+            return;
+        }
+
+        forgotPasswordUsernameTextField.setText(username);
+        forgotPasswordUsernameTextField.setDisable(true);
+
+        forgotPasswordSendOTPButton.setDisable(false);
+        forgotPasswordSubmitButton.setDisable(true);
+
+        forgotPasswordEmailTextField.setDisable(false);
+        forgotPasswordNewPasswordTextField.setDisable(false);
+
+        forgotPasswordPane.setVisible(true);
+        signInPane.setVisible(false);
+
+        signInPasswordTextField.clear();
+        signInPasswordField.clear();
+    }
+
+    @FXML
     private void onSignInMouseClicked(MouseEvent event) {
         onSignInButtonClick();
     }
@@ -198,8 +230,110 @@ public class SignInAndSignUpController {
     private void onSignUpAccountButtonClick(ActionEvent event) {
         signUpSelectRoleComboBox.setValue("user");
 
-        signInPane.setVisible(false);
         signUpPane.setVisible(true);
+        signInPane.setVisible(false);
+    }
+
+    ////////////////////////////// Forgot Password //////////////////////////////
+
+    @FXML
+    private void onForgotPasswordBackImageMouseClicked(MouseEvent mouseEvent) {
+        signInPane.setVisible(true);
+        forgotPasswordPane.setVisible(false);
+
+        forgotPasswordUsernameTextField.clear();
+        forgotPasswordEmailTextField.clear();
+        forgotPasswordNewPasswordTextField.clear();
+        forgotPasswordOTPCodeTextField.clear();
+    }
+
+    private String forgotPassword_Username =  null;
+    private String forgotPassword_NewPassword = null;
+    private String forgotPasswordOTP = null;
+
+    @FXML
+    private void onForgotPasswordSendOTPButtonClick(ActionEvent event) {
+        forgotPassword_Username = forgotPasswordUsernameTextField.getText();
+        String forgotPassword_Email = forgotPasswordEmailTextField.getText();
+        forgotPassword_NewPassword = forgotPasswordNewPasswordTextField.getText();
+
+        if (forgotPassword_Username.isEmpty() || forgotPassword_Email.isEmpty() || forgotPassword_NewPassword.isEmpty()) {
+            ShowAlert.showAlert(Alert.AlertType.WARNING, "Input Error",
+                    "Email and Password fields are required", forgotPasswordPane);
+            return;
+        }
+
+        if (isValidEmail(forgotPassword_Email)) {
+            ShowAlert.showAlert(Alert.AlertType.WARNING, "Invalid Email",
+                    "Please enter a valid email address", forgotPasswordPane);
+            return;
+        }
+
+        if (forgotPassword_NewPassword.length() < 4 || forgotPassword_NewPassword.length() > 11) {
+            ShowAlert.showAlert(Alert.AlertType.WARNING, "Invalid Password",
+                    "Password length must be between 5 and 10 characters", forgotPasswordPane);
+            return;
+        }
+
+        boolean isValid = SignInAndSignUpModel.findUserEmail(forgotPassword_Username, forgotPassword_Email,forgotPasswordPane);
+
+        if (isValid) {
+            //System.out.println("Username and email match found.");
+
+            forgotPasswordOTP = OTPGenerator.generateNumericOTP(6);
+            //System.out.println("Generated forgotPasswordOTP: " + forgotPasswordOTP);
+
+            boolean isOTPSent = EmailOTPSender.sendEmail(forgotPassword_Email, forgotPasswordOTP);
+
+            if (isOTPSent) {
+                forgotPasswordEmailTextField.setDisable(true);
+                forgotPasswordNewPasswordTextField.setDisable(true);
+
+                forgotPasswordSendOTPButton.setDisable(true);
+                forgotPasswordSubmitButton.setDisable(false);
+            } else {
+                ShowAlert.showAlert(Alert.AlertType.ERROR, "Email Error",
+                        "Failed to send OTP\nPlease try again later", forgotPasswordPane);
+            }
+        }
+    }
+
+    @FXML
+    private void onForgotPasswordSubmitButtonClick(ActionEvent event) {
+        String forgotPassword_EnterOTP = forgotPasswordOTPCodeTextField.getText();
+
+        if (forgotPassword_EnterOTP.isEmpty()) {
+            ShowAlert.showAlert(Alert.AlertType.WARNING, "Input Error",
+                    "OTP Code field is required", forgotPasswordPane);
+            return;
+        }
+
+        System.out.println("Generated forgotPassword_OTP  SubmitButton: " + forgotPasswordOTP);
+
+        if (forgotPassword_EnterOTP.equals(forgotPasswordOTP)) {
+
+            //System.out.println("Generated OTP Eq : " + forgotPasswordOTP);
+            //System.out.println(forgotPassword_Username + " || " + forgotPassword_NewPassword + " || " + password + " || " + role);
+
+            //forgotPasswordSubmitButton.setDisable(true);
+
+            boolean isResetPassword = SignInAndSignUpModel.resetUserPassword(forgotPassword_Username, forgotPassword_NewPassword, signInPane);
+
+            if (isResetPassword) {
+                signInPane.setVisible(true);
+                forgotPasswordPane.setVisible(false);
+
+                forgotPasswordUsernameTextField.clear();
+                forgotPasswordEmailTextField.clear();
+                forgotPasswordNewPasswordTextField.clear();
+                forgotPasswordOTPCodeTextField.clear();
+            }
+
+        } else {
+            ShowAlert.showAlert(Alert.AlertType.WARNING, "OTP Error",
+                    "Incorrect OTP\nPlease try again", forgotPasswordPane);
+        }
+
     }
 
     ////////////////////////////// Sign Up //////////////////////////////
@@ -208,7 +342,7 @@ public class SignInAndSignUpController {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
         Pattern pattern = Pattern.compile(emailRegex);
         Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
+        return !matcher.matches();
     }
 
     private String username = null;
@@ -229,30 +363,44 @@ public class SignInAndSignUpController {
             return;
         }
 
+<<<<<<< Updated upstream
         // Validate email format
         /*if (!isValidEmail(email)) {
+=======
+        if (username.length() < 4 || username.length() > 9) {
+            ShowAlert.showAlert(Alert.AlertType.WARNING, "Invalid Username",
+                    "Username length must be between 5 and 8 characters", signUpPane);
+            return;
+        }
+
+        if (isValidEmail(email)) {
+>>>>>>> Stashed changes
             ShowAlert.showAlert(Alert.AlertType.WARNING, "Invalid Email",
                     "Please enter a valid email address", signUpPane);
             return;
         }*/
 
-        verificationCenterRootPasswordTextField.setDisable(false);
-        verificationCenterYourEmailTextField.setDisable(true);
-        verificationCenterOTPCodeTextField.clear();
+        boolean isAvailableEmailAndUsername = SignInAndSignUpModel.isCheckUsernameAndEmailAvailable(username, email, signUpPane);
 
-        verificationCenterYourEmailTextField.setText(email);
+        if (isAvailableEmailAndUsername) {
+            verificationCenterRootPasswordTextField.setDisable(false);
+            verificationCenterYourEmailTextField.setDisable(true);
+            verificationCenterOTPCodeTextField.clear();
 
-        sendOTPButton.setDisable(false);
-        submitButton.setDisable(true);
+            verificationCenterYourEmailTextField.setText(email);
 
-        signUpPane.setVisible(false);
-        verificationCenterPane.setVisible(true);
+            verificationCenterSendOTPButton.setDisable(false);
+            verificationCenterSubmitButton.setDisable(true);
+
+            verificationCenterPane.setVisible(true);
+            signUpPane.setVisible(false);
+        }
     }
 
     @FXML
     private void onSignInAccountButtonClick(ActionEvent event) {
-        signUpPane.setVisible(false);
         signInPane.setVisible(true);
+        signUpPane.setVisible(false);
     }
 
     @FXML
@@ -274,9 +422,9 @@ public class SignInAndSignUpController {
     ////////////////////////////// Verification Center //////////////////////////////
 
     @FXML
-    private void onVerificationCenterBackImageImageMouseClicked(MouseEvent mouseEvent) {
-        verificationCenterPane.setVisible(false);
+    private void onVerificationCenterBackImageMouseClicked(MouseEvent mouseEvent) {
         signUpPane.setVisible(true);
+        verificationCenterPane.setVisible(false);
         verificationCenterRootPasswordTextField.clear();
         verificationCenterOTPCodeTextField.clear();
     }
@@ -286,7 +434,7 @@ public class SignInAndSignUpController {
     private String generateOTP = null;
 
     @FXML
-    private void onSendOTPButtonClick(ActionEvent event) {
+    private void onVerificationCenterSendOTPButtonClick(ActionEvent event) {
         rootPassword = verificationCenterRootPasswordTextField.getText();
         recipientEmail = verificationCenterYourEmailTextField.getText();
 
@@ -303,8 +451,8 @@ public class SignInAndSignUpController {
             boolean isOTPSent = EmailOTPSender.sendEmail(recipientEmail, generateOTP);
 
             if (isOTPSent) {
-                sendOTPButton.setDisable(true);
-                submitButton.setDisable(false);
+                verificationCenterSendOTPButton.setDisable(true);
+                verificationCenterSubmitButton.setDisable(false);
                 verificationCenterRootPasswordTextField.setDisable(true);
             } else {
             ShowAlert.showAlert(Alert.AlertType.ERROR, "Email Error",
@@ -318,7 +466,7 @@ public class SignInAndSignUpController {
     }
 
     @FXML
-    private void onSubmitButtonClick(ActionEvent event) {
+    private void onVerificationCenterSubmitButtonClick(ActionEvent event) {
         String enteredOTP = verificationCenterOTPCodeTextField.getText();
 
         if (rootPassword.isEmpty() || recipientEmail.isEmpty() || enteredOTP.isEmpty()) {
@@ -333,10 +481,18 @@ public class SignInAndSignUpController {
             System.out.println("Generated OTP Eq : " + generateOTP);
             System.out.println(username + " || " + email + " || " + password + " || " + role);
 
-            submitButton.setDisable(true);
+            verificationCenterSubmitButton.setDisable(true);
 
-            SignInAndSignUpModel.registerUser(username, email, password, role, signUpPane);
+            SignInAndSignUpModel.registerUser(username, email, password, role, verificationCenterPane);
 
+        } else {
+            ShowAlert.showAlert(Alert.AlertType.WARNING, "OTP Error",
+                    "Incorrect OTP\nPlease try again", verificationCenterPane);
+        }
+    }
+
+    public void registerSuccess(boolean isRegisterSuccess) {
+        if (isRegisterSuccess) {
             signUpSelectRoleComboBox.setValue("user");
             signUpUsernameTextField.clear();
             signUpEmailTextField.clear();
@@ -348,10 +504,16 @@ public class SignInAndSignUpController {
 
             verificationCenterPane.setVisible(false);
             signUpPane.setVisible(true);
+<<<<<<< Updated upstream
         } else {
             ShowAlert.showAlert(Alert.AlertType.WARNING, "OTP Error",
                     "Incorrect OTP. Please try again", verificationCenterPane);
         }
+=======
+        } /*else {
+            System.out.println("Handle failed register here");
+        }*/
+>>>>>>> Stashed changes
     }
 
     /////////////////////////////////////////////////////////////////////////////////

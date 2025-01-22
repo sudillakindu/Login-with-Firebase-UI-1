@@ -22,110 +22,6 @@
                 </cursor>
             </ImageView>
         </Pane>
-        <Pane fx:id="signInPane" layoutX="550.0" prefHeight="768.0" prefWidth="474.0" style="-fx-background-color: #ffffff; -fx-text-fill: white;">
-            <ImageView fx:id="signInImage" fitHeight="171.0" fitWidth="257.0" layoutX="109.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="113.0" layoutY="254.0" text="Welcome back" textAlignment="CENTER">
-                <font>
-                    <Font name="Arial Rounded MT Bold" size="35.0" />
-                </font>
-            </Label>
-            <Label layoutX="113.0" layoutY="345.0" text="Username">
-                <font>
-                    <Font name="Times New Roman Bold" size="17.0" />
-                </font>
-            </Label>
-            <Label layoutX="113.0" layoutY="428.0" text="Password">
-                <font>
-                    <Font name="Times New Roman Bold" size="17.0" />
-                </font>
-            </Label>
-            <TextField fx:id="signInUsernameTextField" layoutX="113.0" layoutY="371.0" prefHeight="25.0" prefWidth="249.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #e6e6e6); -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3E7B27; -fx-border-width: 2; -fx-padding: 5 10; -fx-font-size: 14px; -fx-text-fill: #333333; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);">
-                <cursor>
-                    <Cursor fx:constant="TEXT" />
-                </cursor>
-            </TextField>
-            <TextField fx:id="signInPasswordTextField" layoutX="113.0" layoutY="454.0" prefHeight="25.0" prefWidth="249.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #e6e6e6); -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3E7B27; -fx-border-width: 2; -fx-padding: 5 10; -fx-font-size: 14px; -fx-text-fill: #333333; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);">
-                <cursor>
-                    <Cursor fx:constant="TEXT" />
-                </cursor>
-            </TextField>
-            <PasswordField fx:id="signInPasswordField" layoutX="113.0" layoutY="454.0" prefHeight="25.0" prefWidth="249.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #e6e6e6); -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3E7B27; -fx-border-width: 2; -fx-padding: 5 10; -fx-font-size: 14px; -fx-text-fill: #333333; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);">
-                <cursor>
-                    <Cursor fx:constant="TEXT" />
-                </cursor>
-            </PasswordField>
-            <Label layoutX="113.0" layoutY="300.0" text="Please enter your details" textAlignment="CENTER">
-                <font>
-                    <Font name="Times New Roman" size="15.0" />
-                </font>
-            </Label>
-            <Button fx:id="signInButton" layoutX="113.0" layoutY="539.0" mnemonicParsing="false" onMouseClicked="#onSignInMouseClicked" prefWidth="249.0" style="-fx-background-color: #123524; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-padding: 10 20; -fx-border-radius: 25; -fx-background-radius: 25; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 5); -fx-border-color: rgba(255, 255, 255, 0.5); -fx-border-width: 2; -fx-border-insets: -1; -fx-background-insets: -1;" text="Sign In">
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
-            </Button>
-            <Group layoutX="156.0" layoutY="596.0">
-                <Label layoutX="0.19775390625" layoutY="7.0" text="Need an account?" textAlignment="CENTER">
-                    <font>
-                        <Font name="Times New Roman" size="15.0" />
-                    </font>
-                </Label>
-                <Button fx:id="signUpAccountButton" layoutX="102.19775390625" mnemonicParsing="false" onAction="#onSignUpAccountButtonClick" style="-fx-background-color: transparent; -fx-text-fill: #123524;" text="Sign Up" underline="true">
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                    <font>
-                        <Font size="15.0" />
-                    </font>
-                </Button>
-            </Group>
-            <Button fx:id="signInForgotPasswordButton" layoutX="264.0" layoutY="492.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #123524;" text="Forgot password" underline="true">
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
-            </Button>
-            <Button fx:id="signInShowPasswordButton" layoutX="325.0" layoutY="431.0" mnemonicParsing="false" onAction="#onSignInShowPasswordButtonClick" style="-fx-background-color: transparent; -fx-text-fill: #123524;" text="Show">
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
-            </Button>
-            <ImageView fx:id="stellixorImage" fitHeight="30.0" fitWidth="30.0" layoutX="86.0" layoutY="639.0" onMouseClicked="#onStellixorImageMouseClicked" pickOnBounds="true" preserveRatio="true">
-                <cursor>
-                    <Cursor fx:constant="OPEN_HAND" />
-                </cursor>
-            </ImageView>
-            <Label fx:id="stellixorLabel" layoutX="121.0" layoutY="644.0" text="Empowered by Stellixor Technologies">
-                <font>
-                    <Font name="System Bold" size="15.0" />
-                </font>
-                <textFill>
-                    <LinearGradient cycleMethod="REFLECT">
-                        <stops>
-                            <Stop>
-                                <color>
-                                    <Color red="0.8421052694320679" green="0.2300194948911667" blue="0.2300194948911667" />
-                                </color>
-                            </Stop>
-                            <Stop offset="0.006711409395973154">
-                                <color>
-                                    <Color />
-                                </color>
-                            </Stop>
-                            <Stop offset="0.5906040268456375">
-                                <color>
-                                    <Color red="0.0941176488995552" green="0.5686274766921997" blue="0.7843137383460999" />
-                                </color>
-                            </Stop>
-                            <Stop offset="1.0">
-                                <color>
-                                    <Color red="0.0941176488995552" green="0.5686274766921997" blue="0.7843137383460999" />
-                                </color>
-                            </Stop>
-                        </stops>
-                    </LinearGradient>
-                </textFill>
-            </Label>
-        </Pane>
         <Pane fx:id="signUpPane" layoutX="550.0" prefHeight="768.0" prefWidth="474.0" style="-fx-background-color: #ffffff; -fx-text-fill: white;">
             <ImageView fx:id="signUpImage" fitHeight="171.0" fitWidth="257.0" layoutX="119.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
             <Label layoutX="80.0" layoutY="217.0" text="Create an account" textAlignment="CENTER">
@@ -195,7 +91,115 @@
             </cursor>
          </TextField>
         </Pane>
+<<<<<<< Updated upstream
         <Pane fx:id="verificationCenterPane" layoutX="550.0" prefHeight="768.0" prefWidth="474.0" style="-fx-background-color: #ffffff; -fx-text-fill: white; -fx-border-color: black; -fx-border-width: 5px;">
+=======
+        <Pane fx:id="signInPane" layoutX="550.0" prefHeight="768.0" prefWidth="474.0" style="-fx-background-color: #ffffff; -fx-text-fill: white;">
+            <ImageView fx:id="signInImage" fitHeight="171.0" fitWidth="257.0" layoutX="109.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="113.0" layoutY="254.0" text="Welcome back" textAlignment="CENTER">
+                <font>
+                    <Font name="Arial Rounded MT Bold" size="35.0" />
+                </font>
+            </Label>
+            <Label layoutX="113.0" layoutY="345.0" text="Username">
+                <font>
+                    <Font name="Times New Roman Bold" size="17.0" />
+                </font>
+            </Label>
+            <Label layoutX="113.0" layoutY="428.0" text="Password">
+                <font>
+                    <Font name="Times New Roman Bold" size="17.0" />
+                </font>
+            </Label>
+            <TextField fx:id="signInUsernameTextField" layoutX="113.0" layoutY="371.0" prefHeight="25.0" prefWidth="249.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #e6e6e6); -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3E7B27; -fx-border-width: 2; -fx-padding: 5 10; -fx-font-size: 14px; -fx-text-fill: #333333; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);">
+                <cursor>
+                    <Cursor fx:constant="TEXT" />
+                </cursor>
+            </TextField>
+            <TextField fx:id="signInPasswordTextField" layoutX="113.0" layoutY="454.0" prefHeight="25.0" prefWidth="249.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #e6e6e6); -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3E7B27; -fx-border-width: 2; -fx-padding: 5 10; -fx-font-size: 14px; -fx-text-fill: #333333; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);">
+                <cursor>
+                    <Cursor fx:constant="TEXT" />
+                </cursor>
+            </TextField>
+            <PasswordField fx:id="signInPasswordField" layoutX="113.0" layoutY="454.0" prefHeight="25.0" prefWidth="249.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #e6e6e6); -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3E7B27; -fx-border-width: 2; -fx-padding: 5 10; -fx-font-size: 14px; -fx-text-fill: #333333; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);">
+                <cursor>
+                    <Cursor fx:constant="TEXT" />
+                </cursor>
+            </PasswordField>
+            <Label layoutX="113.0" layoutY="300.0" text="Please enter your details" textAlignment="CENTER">
+                <font>
+                    <Font name="Times New Roman" size="15.0" />
+                </font>
+            </Label>
+            <Button fx:id="signInButton" layoutX="113.0" layoutY="539.0" mnemonicParsing="false" onMouseClicked="#onSignInMouseClicked" prefWidth="249.0" style="-fx-background-color: #123524; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-padding: 10 20; -fx-border-radius: 25; -fx-background-radius: 25; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 5); -fx-border-color: rgba(255, 255, 255, 0.5); -fx-border-width: 2; -fx-border-insets: -1; -fx-background-insets: -1;" text="Sign In">
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+            </Button>
+            <Group layoutX="156.0" layoutY="596.0">
+                <Label layoutX="0.19775390625" layoutY="7.0" text="Need an account?" textAlignment="CENTER">
+                    <font>
+                        <Font name="Times New Roman" size="15.0" />
+                    </font>
+                </Label>
+                <Button fx:id="signUpAccountButton" layoutX="102.19775390625" mnemonicParsing="false" onAction="#onSignUpAccountButtonClick" style="-fx-background-color: transparent; -fx-text-fill: #123524;" text="Sign Up" underline="true">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Button>
+            </Group>
+            <Button fx:id="signInForgotPasswordButton" layoutX="264.0" layoutY="492.0" mnemonicParsing="false" onAction="#onSignInForgotPasswordButtonClick" style="-fx-background-color: transparent; -fx-text-fill: #123524;" text="Forgot password" underline="true">
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+            </Button>
+            <Button fx:id="signInShowPasswordButton" layoutX="325.0" layoutY="431.0" mnemonicParsing="false" onAction="#onSignInShowPasswordButtonClick" style="-fx-background-color: transparent; -fx-text-fill: #123524;" text="Show">
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+            </Button>
+            <ImageView fx:id="stellixorImage" fitHeight="30.0" fitWidth="30.0" layoutX="86.0" layoutY="639.0" onMouseClicked="#onStellixorImageMouseClicked" pickOnBounds="true" preserveRatio="true">
+                <cursor>
+                    <Cursor fx:constant="OPEN_HAND" />
+                </cursor>
+            </ImageView>
+            <Label fx:id="stellixorLabel" layoutX="121.0" layoutY="644.0" text="Empowered by Stellixor Technologies">
+                <font>
+                    <Font name="System Bold" size="15.0" />
+                </font>
+                <textFill>
+                    <LinearGradient cycleMethod="REFLECT">
+                        <stops>
+                            <Stop>
+                                <color>
+                                    <Color red="0.8421052694320679" green="0.2300194948911667" blue="0.2300194948911667" />
+                                </color>
+                            </Stop>
+                            <Stop offset="0.006711409395973154">
+                                <color>
+                                    <Color />
+                                </color>
+                            </Stop>
+                            <Stop offset="0.5906040268456375">
+                                <color>
+                                    <Color red="0.0941176488995552" green="0.5686274766921997" blue="0.7843137383460999" />
+                                </color>
+                            </Stop>
+                            <Stop offset="1.0">
+                                <color>
+                                    <Color red="0.0941176488995552" green="0.5686274766921997" blue="0.7843137383460999" />
+                                </color>
+                            </Stop>
+                        </stops>
+                    </LinearGradient>
+                </textFill>
+            </Label>
+        </Pane>
+        <Pane fx:id="verificationCenterPane" layoutX="550.0" prefHeight="768.0" prefWidth="474.0" style="-fx-background-color: #ffffff; -fx-text-fill: white;">
+>>>>>>> Stashed changes
             <ImageView fx:id="verificationCenterImage" fitHeight="203.0" fitWidth="265.0" layoutX="139.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
             <Label layoutX="80.0" layoutY="274.0" text="Verification Center" textAlignment="CENTER">
                 <font>
@@ -222,7 +226,7 @@
                     <Font name="Times New Roman" size="15.0" />
                 </font>
             </Label>
-            <Button fx:id="submitButton" layoutX="80.0" layoutY="604.0" mnemonicParsing="false" onAction="#onSubmitButtonClick" prefHeight="43.0" prefWidth="314.0" style="-fx-background-color: #123524; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-padding: 10 20; -fx-border-radius: 25; -fx-background-radius: 25; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 5); -fx-border-color: rgba(255, 255, 255, 0.5); -fx-border-width: 2; -fx-border-insets: -1; -fx-background-insets: -1;" text="Submit">
+            <Button fx:id="verificationCenterSubmitButton" layoutX="80.0" layoutY="604.0" mnemonicParsing="false" onAction="#onVerificationCenterSubmitButtonClick" prefHeight="43.0" prefWidth="314.0" style="-fx-background-color: #123524; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-padding: 10 20; -fx-border-radius: 25; -fx-background-radius: 25; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 5); -fx-border-color: rgba(255, 255, 255, 0.5); -fx-border-width: 2; -fx-border-insets: -1; -fx-background-insets: -1;" text="Submit">
                 <cursor>
                     <Cursor fx:constant="HAND" />
                 </cursor>
@@ -242,16 +246,86 @@
                <Cursor fx:constant="TEXT" />
             </cursor>
          </TextField>
-         <ImageView fx:id="verificationCenterBackImage" fitHeight="35.0" fitWidth="35.0" layoutX="15.0" layoutY="15.0" onMouseClicked="#onVerificationCenterBackImageImageMouseClicked" pickOnBounds="true" preserveRatio="true">
+         <ImageView fx:id="verificationCenterBackImage" fitHeight="35.0" fitWidth="35.0" layoutX="15.0" layoutY="15.0" onMouseClicked="#onVerificationCenterBackImageMouseClicked" pickOnBounds="true" preserveRatio="true">
             <cursor>
                <Cursor fx:constant="HAND" />
             </cursor>
          </ImageView>
-         <Button fx:id="sendOTPButton" layoutX="241.0" layoutY="543.0" mnemonicParsing="false" onAction="#onSendOTPButtonClick" prefHeight="34.0" prefWidth="85.0" style="-fx-background-color: #365343; -fx-text-fill: white; -fx-font-size: 11px; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: rgba(255, 255, 255, 0.5); -fx-border-width: 2; -fx-border-insets: -1; -fx-background-insets: -1;" text="Send OTP">
+         <Button fx:id="verificationCenterSendOTPButton" layoutX="241.0" layoutY="543.0" mnemonicParsing="false" onAction="#onVerificationCenterSendOTPButtonClick" prefHeight="34.0" prefWidth="85.0" style="-fx-background-color: #365343; -fx-text-fill: white; -fx-font-size: 11px; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: rgba(255, 255, 255, 0.5); -fx-border-width: 2; -fx-border-insets: -1; -fx-background-insets: -1;" text="Send OTP">
             <cursor>
                <Cursor fx:constant="HAND" />
             </cursor>
          </Button>
         </Pane>
+      <Pane fx:id="forgotPasswordPane" layoutX="550.0" prefHeight="768.0" prefWidth="474.0" style="-fx-background-color: #ffffff; -fx-text-fill: white;">
+         <children>
+            <ImageView fx:id="forgotPasswordImage" fitHeight="203.0" fitWidth="265.0" layoutX="105.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="92.0" layoutY="237.0" text="Forgot Password" textAlignment="CENTER">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="35.0" />
+               </font>
+            </Label>
+            <Label layoutX="92.0" layoutY="477.0" text="New Passowrd">
+               <font>
+                  <Font name="Times New Roman Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="92.0" layoutY="553.0" text="OTP Code">
+               <font>
+                  <Font name="Times New Roman Bold" size="17.0" />
+               </font>
+            </Label>
+            <TextField fx:id="forgotPasswordNewPasswordTextField" layoutX="92.0" layoutY="505.0" prefWidth="249.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #e6e6e6); -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3E7B27; -fx-border-width: 2; -fx-font-size: 14px; -fx-text-fill: #333333; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
+            <Label layoutX="92.0" layoutY="286.0" text="Change or reset your password!" textAlignment="CENTER">
+               <font>
+                  <Font name="Times New Roman" size="15.0" />
+               </font>
+            </Label>
+            <Button fx:id="forgotPasswordSubmitButton" layoutX="92.0" layoutY="647.0" mnemonicParsing="false" onAction="#onForgotPasswordSubmitButtonClick" prefHeight="43.0" prefWidth="291.0" style="-fx-background-color: #123524; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-padding: 10 20; -fx-border-radius: 25; -fx-background-radius: 25; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 5); -fx-border-color: rgba(255, 255, 255, 0.5); -fx-border-width: 2; -fx-border-insets: -1; -fx-background-insets: -1;" text="Submit">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Label layoutX="92.0" layoutY="325.0" text="Username">
+               <font>
+                  <Font name="Times New Roman Bold" size="17.0" />
+               </font>
+            </Label>
+            <TextField fx:id="forgotPasswordUsernameTextField" editable="false" layoutX="92.0" layoutY="353.0" prefWidth="249.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #e6e6e6); -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3E7B27; -fx-border-width: 2; -fx-font-size: 14px; -fx-text-fill: #333333; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);">
+               <cursor>
+                  <Cursor fx:constant="NONE" />
+               </cursor>
+            </TextField>
+            <TextField fx:id="forgotPasswordOTPCodeTextField" layoutX="92.0" layoutY="581.0" prefHeight="34.0" prefWidth="152.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #e6e6e6); -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3E7B27; -fx-border-width: 2; -fx-font-size: 14px; -fx-text-fill: #333333; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
+            <ImageView fx:id="forgotPasswordBackImage" fitHeight="35.0" fitWidth="35.0" layoutX="15.0" layoutY="15.0" onMouseClicked="#onForgotPasswordBackImageMouseClicked" pickOnBounds="true" preserveRatio="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <Button fx:id="forgotPasswordSendOTPButton" layoutX="253.0" layoutY="581.0" mnemonicParsing="false" onAction="#onForgotPasswordSendOTPButtonClick" prefHeight="34.0" prefWidth="85.0" style="-fx-background-color: #365343; -fx-text-fill: white; -fx-font-size: 11px; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: rgba(255, 255, 255, 0.5); -fx-border-width: 2; -fx-border-insets: -1; -fx-background-insets: -1;" text="Send OTP">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Label layoutX="92.0" layoutY="401.0" text="Email">
+               <font>
+                  <Font name="Times New Roman Bold" size="17.0" />
+               </font>
+            </Label>
+            <TextField fx:id="forgotPasswordEmailTextField" layoutX="92.0" layoutY="429.0" prefWidth="249.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #e6e6e6); -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3E7B27; -fx-border-width: 2; -fx-font-size: 14px; -fx-text-fill: #333333; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
+         </children>
+      </Pane>
     </Pane>
 </AnchorPane>
