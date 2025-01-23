@@ -13,8 +13,8 @@ public class EmailOTPSender {
     private static final Logger logger = Logger.getLogger(EmailOTPSender.class.getName());
 
     public static boolean sendEmail(String recipientEmail, String otp) {
-        final String senderEmail = "masudillakindu@gmail.com";
-        final String senderPassword = "bzvo lfsv kuqe cxdt";
+        final String senderEmail = "stellixor.contact@gmail.com";
+        final String senderPassword = "lxup iqwo ucfz croj";
 
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
@@ -45,7 +45,7 @@ public class EmailOTPSender {
                     "<h3><b>  " + otp + "</b></h3>" +
                     "<p>Please enter this code on the application to proceed. For your security, this OTP is valid for the next <b>5 minutes</b> only.</p>" +
                     "<p>If you didn’t request this code, please ignore this email.</p>" +
-                    "<p>Stay safe,<br><span style='color: #2E86C1;'>The Stellixor Team</span></p>" +
+                    "<p>Stay safe,<br><span style='color: #2E86C1;'>The Stellixor Team<br>stellixor.contact@gmail.com</span></p>" +
                     "</body>" +
                     "</html>";
 

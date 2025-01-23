@@ -195,64 +195,6 @@
                 </textFill>
             </Label>
         </Pane>
-        <Pane fx:id="verificationCenterPane" layoutX="550.0" prefHeight="768.0" prefWidth="474.0" style="-fx-background-color: #ffffff; -fx-text-fill: white;">
-            <ImageView fx:id="verificationCenterImage" fitHeight="203.0" fitWidth="265.0" layoutX="139.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="80.0" layoutY="274.0" text="Verification Center" textAlignment="CENTER">
-                <font>
-                    <Font name="Arial Rounded MT Bold" size="35.0" />
-                </font>
-            </Label>
-            <Label layoutX="80.0" layoutY="439.0" text="Your Email">
-                <font>
-                    <Font name="Times New Roman Bold" size="17.0" />
-                </font>
-            </Label>
-            <Label layoutX="80.0" layoutY="515.0" text="OTP Code">
-                <font>
-                    <Font name="Times New Roman Bold" size="17.0" />
-                </font>
-            </Label>
-            <TextField fx:id="verificationCenterYourEmailTextField" editable="false" layoutX="80.0" layoutY="467.0" prefWidth="249.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #e6e6e6); -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3E7B27; -fx-border-width: 2; -fx-font-size: 14px; -fx-text-fill: #333333; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);">
-                <cursor>
-                    <Cursor fx:constant="NONE" />
-                </cursor>
-            </TextField>
-            <Label layoutX="80.0" layoutY="323.0" text="Your service is necessary for us!" textAlignment="CENTER">
-                <font>
-                    <Font name="Times New Roman" size="15.0" />
-                </font>
-            </Label>
-            <Button fx:id="verificationCenterSubmitButton" layoutX="80.0" layoutY="604.0" mnemonicParsing="false" onAction="#onVerificationCenterSubmitButtonClick" prefHeight="43.0" prefWidth="314.0" style="-fx-background-color: #123524; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-padding: 10 20; -fx-border-radius: 25; -fx-background-radius: 25; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 5); -fx-border-color: rgba(255, 255, 255, 0.5); -fx-border-width: 2; -fx-border-insets: -1; -fx-background-insets: -1;" text="Submit">
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
-            </Button>
-            <Label layoutX="80.0" layoutY="363.0" text="Root Password">
-                <font>
-                    <Font name="Times New Roman Bold" size="17.0" />
-                </font>
-            </Label>
-            <TextField fx:id="verificationCenterRootPasswordTextField" layoutX="80.0" layoutY="391.0" prefWidth="249.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #e6e6e6); -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3E7B27; -fx-border-width: 2; -fx-font-size: 14px; -fx-text-fill: #333333; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);">
-                <cursor>
-                    <Cursor fx:constant="TEXT" />
-                </cursor>
-            </TextField>
-            <TextField fx:id="verificationCenterOTPCodeTextField" layoutX="80.0" layoutY="543.0" prefHeight="34.0" prefWidth="152.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #e6e6e6); -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3E7B27; -fx-border-width: 2; -fx-font-size: 14px; -fx-text-fill: #333333; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);">
-                <cursor>
-                    <Cursor fx:constant="TEXT" />
-                </cursor>
-            </TextField>
-            <ImageView fx:id="verificationCenterBackImage" fitHeight="35.0" fitWidth="35.0" layoutX="15.0" layoutY="15.0" onMouseClicked="#onVerificationCenterBackImageMouseClicked" pickOnBounds="true" preserveRatio="true">
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
-            </ImageView>
-            <Button fx:id="verificationCenterSendOTPButton" layoutX="241.0" layoutY="543.0" mnemonicParsing="false" onAction="#onVerificationCenterSendOTPButtonClick" prefHeight="34.0" prefWidth="85.0" style="-fx-background-color: #365343; -fx-text-fill: white; -fx-font-size: 11px; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: rgba(255, 255, 255, 0.5); -fx-border-width: 2; -fx-border-insets: -1; -fx-background-insets: -1;" text="Send OTP">
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
-            </Button>
-        </Pane>
         <Pane fx:id="forgotPasswordPane" layoutX="550.0" prefHeight="768.0" prefWidth="474.0" style="-fx-background-color: #ffffff; -fx-text-fill: white;">
             <children>
                 <ImageView fx:id="forgotPasswordImage" fitHeight="203.0" fitWidth="265.0" layoutX="105.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true" />
@@ -322,6 +264,64 @@
                     </cursor>
                 </TextField>
             </children>
+        </Pane>
+        <Pane fx:id="verificationCenterPane" layoutX="550.0" prefHeight="768.0" prefWidth="474.0" style="-fx-background-color: #ffffff; -fx-text-fill: white;">
+            <ImageView fx:id="verificationCenterImage" fitHeight="203.0" fitWidth="265.0" layoutX="139.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="80.0" layoutY="274.0" text="Verification Center" textAlignment="CENTER">
+                <font>
+                    <Font name="Arial Rounded MT Bold" size="35.0" />
+                </font>
+            </Label>
+            <Label layoutX="80.0" layoutY="439.0" text="Your Email">
+                <font>
+                    <Font name="Times New Roman Bold" size="17.0" />
+                </font>
+            </Label>
+            <Label layoutX="80.0" layoutY="515.0" text="OTP Code">
+                <font>
+                    <Font name="Times New Roman Bold" size="17.0" />
+                </font>
+            </Label>
+            <TextField fx:id="verificationCenterYourEmailTextField" editable="false" layoutX="80.0" layoutY="467.0" prefWidth="249.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #e6e6e6); -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3E7B27; -fx-border-width: 2; -fx-font-size: 14px; -fx-text-fill: #333333; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);">
+                <cursor>
+                    <Cursor fx:constant="NONE" />
+                </cursor>
+            </TextField>
+            <Label layoutX="80.0" layoutY="323.0" text="Your service is necessary for us!" textAlignment="CENTER">
+                <font>
+                    <Font name="Times New Roman" size="15.0" />
+                </font>
+            </Label>
+            <Button fx:id="verificationCenterSubmitButton" layoutX="80.0" layoutY="604.0" mnemonicParsing="false" onAction="#onVerificationCenterSubmitButtonClick" prefHeight="43.0" prefWidth="314.0" style="-fx-background-color: #123524; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-padding: 10 20; -fx-border-radius: 25; -fx-background-radius: 25; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 5); -fx-border-color: rgba(255, 255, 255, 0.5); -fx-border-width: 2; -fx-border-insets: -1; -fx-background-insets: -1;" text="Submit">
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+            </Button>
+            <Label layoutX="80.0" layoutY="363.0" text="Root Password">
+                <font>
+                    <Font name="Times New Roman Bold" size="17.0" />
+                </font>
+            </Label>
+            <TextField fx:id="verificationCenterRootPasswordTextField" layoutX="80.0" layoutY="391.0" prefWidth="249.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #e6e6e6); -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3E7B27; -fx-border-width: 2; -fx-font-size: 14px; -fx-text-fill: #333333; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);">
+                <cursor>
+                    <Cursor fx:constant="TEXT" />
+                </cursor>
+            </TextField>
+            <TextField fx:id="verificationCenterOTPCodeTextField" layoutX="80.0" layoutY="543.0" prefHeight="34.0" prefWidth="152.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #e6e6e6); -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #3E7B27; -fx-border-width: 2; -fx-font-size: 14px; -fx-text-fill: #333333; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);">
+                <cursor>
+                    <Cursor fx:constant="TEXT" />
+                </cursor>
+            </TextField>
+            <ImageView fx:id="verificationCenterBackImage" fitHeight="35.0" fitWidth="35.0" layoutX="15.0" layoutY="15.0" onMouseClicked="#onVerificationCenterBackImageMouseClicked" pickOnBounds="true" preserveRatio="true">
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+            </ImageView>
+            <Button fx:id="verificationCenterSendOTPButton" layoutX="241.0" layoutY="543.0" mnemonicParsing="false" onAction="#onVerificationCenterSendOTPButtonClick" prefHeight="34.0" prefWidth="85.0" style="-fx-background-color: #365343; -fx-text-fill: white; -fx-font-size: 11px; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: rgba(255, 255, 255, 0.5); -fx-border-width: 2; -fx-border-insets: -1; -fx-background-insets: -1;" text="Send OTP">
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+            </Button>
         </Pane>
     </Pane>
 </AnchorPane>

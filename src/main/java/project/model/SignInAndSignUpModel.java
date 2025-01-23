@@ -1,10 +1,8 @@
 package project.model;
 
-import com.google.cloud.firestore.Firestore;
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
-import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.DocumentSnapshot;
-import com.google.cloud.firestore.CollectionReference;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.Pane;
 
@@ -33,24 +31,6 @@ public class SignInAndSignUpModel {
         try {
             Firestore db = FirestoreClient.getFirestore();
 
-//            if (isUsernameInCollections(db, username, ownerPane)) {
-//                ShowAlert.showAlert(Alert.AlertType.ERROR, "Error", "Username already exists in the system\nPlease choose a different username", ownerPane, () -> {
-//
-//                    System.out.println("aaaaaaaaaaaaaaaaaa");
-//                    ls.registerSuccess(false);
-//                });
-//                return;
-//            }
-//
-//            if (isEmailInCollections(db, email, ownerPane)) {
-//                ShowAlert.showAlert(Alert.AlertType.ERROR, "Error", "Email already exists in the system\nPlease choose a different email", ownerPane, () -> {
-//
-//                    System.out.println("aaaaaaaaaaaaaaaaaa");
-//                    ls.registerSuccess(false);
-//                });
-//                return;
-//            }
-
             if (!isCollectionAvailable(db, role + "s", ownerPane)) {
                 ShowAlert.showAlert(Alert.AlertType.WARNING, "Warning", "Collection '" + role + "s' does not exist\nCreating a new one", ownerPane);
             }
@@ -59,65 +39,72 @@ public class SignInAndSignUpModel {
             UserSignInSignUp newUser = new UserSignInSignUp(username, email, password, role);
             usersRef.document(username).set(newUser).get();
 
-            ShowAlert.showAlert(Alert.AlertType.CONFIRMATION, "Success", role.toUpperCase() + " registered successfully", ownerPane, () -> {
-                ls.registerSuccess(true);
-            });
+            ShowAlert.showAlert(Alert.AlertType.CONFIRMATION, "Success", role.toUpperCase() + " registered successfully", ownerPane);
 
         } catch (InterruptedException | ExecutionException e) {
             ShowAlert.showAlert(Alert.AlertType.ERROR, "Error", "Error during the registration process\nPlease try again later", ownerPane);
         }
     }
 
-    public static boolean isCheckUsernameAndEmailAvailable(String username, String email, Pane ownerPane) {
-        if (isUsernameInCollections(username, ownerPane)) {
-            ShowAlert.showAlert(Alert.AlertType.ERROR, "Error", "Username already exists in the system\nPlease choose a different username", ownerPane);
-            return false;
-        }
-
-        if (isEmailInCollections(email, ownerPane)) {
-            ShowAlert.showAlert(Alert.AlertType.ERROR, "Error", "Email already exists in the system\nPlease choose a different email", ownerPane);
-            return false;
-        }
-
-        return true;
-    }
-
-    private static boolean isUsernameInCollections(String username, Pane ownerPane) {
+    public static boolean isUsernameInCollections(String username, Pane ownerPane) {
         try {
-            Firestore dbUsername = FirestoreClient.getFirestore();
+            Firestore db = FirestoreClient.getFirestore();
 
-            DocumentReference adminDocRef = dbUsername.collection("admins").document(username);
-            if (adminDocRef.get().get().exists()) {
+            // Check in 'admins' collection
+            CollectionReference adminsRef = db.collection("admins");
+            ApiFuture<QuerySnapshot> adminSnapshotFuture = adminsRef.whereEqualTo("username", username).limit(1).get();
+            QuerySnapshot adminSnapshot = adminSnapshotFuture.get();
+
+            if (!adminSnapshot.isEmpty()) {
+                ShowAlert.showAlert(Alert.AlertType.ERROR, "Error", "Username already exists in the system\nPlease choose a different username", ownerPane);
                 return true;
             }
 
-            DocumentReference userDocRef = dbUsername.collection("users").document(username);
-            if (userDocRef.get().get().exists()) {
+            // Check in 'users' collection
+            CollectionReference usersRef = db.collection("users");
+            ApiFuture<QuerySnapshot> userSnapshotFuture = usersRef.whereEqualTo("username", username).limit(1).get();
+            QuerySnapshot userSnapshot = userSnapshotFuture.get();
+
+            if (!userSnapshot.isEmpty()) {
+                ShowAlert.showAlert(Alert.AlertType.ERROR, "Error", "Username already exists in the system\nPlease choose a different username", ownerPane);
                 return true;
             }
 
         } catch (InterruptedException | ExecutionException e) {
+            //e.printStackTrace();
             ShowAlert.showAlert(Alert.AlertType.ERROR, "Error", "Error checking username availability\nPlease try again later", ownerPane);
         }
 
         return false;
     }
 
-    private static boolean isEmailInCollections(String email, Pane ownerPane) {
-        try {
-            Firestore dbEmail = FirestoreClient.getFirestore();
 
-            DocumentReference adminDocRef = dbEmail.collection("admins").document(email);
-            if (adminDocRef.get().get().exists()) {
+    public static boolean isEmailInCollections(String email, Pane ownerPane) {
+        try {
+            Firestore db = FirestoreClient.getFirestore();
+
+            // Check the 'admins' collection
+            CollectionReference adminsRef = db.collection("admins");
+            ApiFuture<QuerySnapshot> adminSnapshotFuture = adminsRef.whereEqualTo("email", email).limit(1).get();
+            QuerySnapshot adminSnapshot = adminSnapshotFuture.get();
+
+            if (!adminSnapshot.isEmpty()) {
+                ShowAlert.showAlert(Alert.AlertType.ERROR, "Error", "Email already exists in the system\nPlease choose a different email", ownerPane);
                 return true;
             }
 
-            DocumentReference userDocRef = dbEmail.collection("users").document(email);
-            if (userDocRef.get().get().exists()) {
+            // Check the 'users' collection
+            CollectionReference usersRef = db.collection("users");
+            ApiFuture<QuerySnapshot> userSnapshotFuture = usersRef.whereEqualTo("email", email).limit(1).get();
+            QuerySnapshot userSnapshot = userSnapshotFuture.get();
+
+            if (!userSnapshot.isEmpty()) {
+                ShowAlert.showAlert(Alert.AlertType.ERROR, "Error", "Email already exists in the system\nPlease choose a different email", ownerPane);
                 return true;
             }
 
         } catch (InterruptedException | ExecutionException e) {
+            //e.printStackTrace();
             ShowAlert.showAlert(Alert.AlertType.ERROR, "Error", "Error checking email availability\nPlease try again later", ownerPane);
         }
         return false;
