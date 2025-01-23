@@ -14,7 +14,7 @@ public class EmailOTPSender {
 
     public static boolean sendEmail(String recipientEmail, String otp) {
         final String senderEmail = "stellixor.contact@gmail.com";
-        final String senderPassword = "lxup iqwo ucfz croj";
+        final String senderPassword = "lxp iqo ucfz crj";
 
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
